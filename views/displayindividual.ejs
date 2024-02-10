@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joined Matches</title>
+    <style>
+      #issac{
+
+
+        #displayind {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        li:hover {
+            transform: scale(1.05);
+        }
+
+        li b {
+            color: #e74c3c;
+        }
+
+        li span {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        li.reason {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        #displayind ul {
+    margin: 0;  
+    padding: 0; 
+}
+
+#displayind li {
+    margin-bottom: 10px; 
+}
+
+
+      }
+    </style>
+</head>
+<body >
+    <div id="displayind" class="individual">
+        <h1>You Joined Match</h1>
+        <% matches.forEach(function(match) { %>
+        <% if(match.reason==null ){%> 
+  
+            <% sessionData.forEach(function(session) { %>
+              <% if (session.sport === match.sport && session.match === match.match && session.admin==adminName) { %>
+                <li>
+                  <span>Sport: <%= match.sport %>,</span>
+                  <span>Match: <%= match.match %>,</span>
+                  <span>Date: <%= match.date %>,</span>
+                  <span>Venue: <%= match.venue %></span>
+                </li>
+              <% } %>
+            <% }); %>
+        
+          <% } else {%>
+            
+              <% sessionData.forEach(function(session) { %>
+                <% if (session.sport === match.sport && session.match === match.match && session.admin==adminName) { %>
+                  <li>
+                    <span>Sport: <%= match.sport %>,
+                   Match: <%= match.match %>,
+                    Date: <%= match.date %>,
+                   Venue: <%= match.venue %>
+                    class="reason">Reason: <%= match.reason %></span>
+                  </li>
+                <% } %>
+              <% }); %>
+            
+          <%}%>
+        <% }); %>
+        </ul>
+    </div>
+</body>
+</html>

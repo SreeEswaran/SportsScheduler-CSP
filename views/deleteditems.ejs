@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deleted Items</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        #displayall {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        li {
+            list-style-type: none;
+            margin: 10px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f5f5f5;
+        }
+
+        li span {
+            font-weight: bold;
+            color: #333;
+            margin-right: 5px;
+        }
+
+        li p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="displayall">
+      <div class="note">
+        Note: This are all deleted matches by admins and user with the reason why they deleted .
+      </div>
+        <h1>Deleted Items</h1>
+        <% matches.forEach(function(match) { %>
+            <% if(match.reason != null) { %>
+                <li>
+                    <span>Sport:</span> <%= match.sport %>,
+                    <span>Match:</span> <%= match.match %>,
+                    <span>Date:</span> <%= match.date %>,
+                    <span>Venue:</span> <%= match.venue %>,<br>
+                    <span>Reason:</span> <%= match.reason %>
+                </li>
+            <% } %>
+        <% }); %>
+    </div>
+</body>
+</html>

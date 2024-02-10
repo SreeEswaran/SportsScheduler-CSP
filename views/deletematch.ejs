@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      body {
+          font-family: 'Arial', sans-serif;
+          background-color: #f0f0f0;
+          margin: 0;
+          padding: 20px;
+      }
+
+      form {
+          max-width: 600px;
+          margin: 20px auto;
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          animation: fadeIn 1s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+          from {
+              opacity: 0;
+              transform: translateY(-20px);
+          }
+          to {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+
+      label {
+          font-weight: bold;
+          display: block;
+          margin-bottom: 8px;
+          transition: color 0.3s ease-in-out;
+      }
+
+      p {
+          margin-bottom: 20px;
+      }
+
+      .match-info {
+          margin-bottom: 15px;
+          border: 1px solid #ddd;
+          padding: 10px;
+          border-radius: 5px;
+          transition: background-color 0.3s ease-in-out;
+      }
+
+      .match-info:hover {
+          background-color: #f8f8f8;
+      }
+
+      .match-info span {
+          display: block;
+          margin-bottom: 5px;
+          transition: color 0.3s ease-in-out;
+      }
+
+      .match-info:hover span {
+          color: #3498db;
+      }
+
+      .delete-btn {
+          background-color: #e74c3c;
+          color: #fff;
+          padding: 10px 15px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease-in-out;
+      }
+
+      .delete-btn:hover {
+          background-color: #c0392b;
+      }
+
+      input[type="text"] {
+          width: 100%;
+          padding: 8px;
+          box-sizing: border-box;
+          margin-bottom: 10px;
+      }
+  </style></head>
+<body>
+    <h1>Delete Match</h1>
+    <form action="/deletematch" method="post" class="1">
+      <% const sportsWithMatches = new Map(); %>
+      <!-- Group matches by sport -->
+      <% matches.forEach(function(match) { %>
+        <% if (match.admin === adminName) { %>
+          <% if (!sportsWithMatches.has(match.sport)) { %>
+            <% sportsWithMatches.set(match.sport, []); %>
+          <% } %>
+          <% sportsWithMatches.get(match.sport).push(match); %>
+        <% } %>
+      <% }); %>
+    
+      <!-- Iterate over sports and their matches -->
+      <% sportsWithMatches.forEach(function(matchesForSport, sport) { %>
+        <% if (matchesForSport.some(match => match.reason === null)) { %>
+          <p>
+            <label class="2"><strong><%= sport %></strong></label><br>
+            <% matchesForSport.forEach(function(match) { %>
+              <% if (match.reason === null) { %>
+               <span class="3"> Date <%= match.date %> </span>
+              <span class="4">  Start <%= match.timein %> </span>
+            <span class="5">End <%= match.timeout %>  </span>
+          <span class="6">  Venue <%= match.venue %> </span>
+        <span class="7"> Player Required <%= match.teamsize %></span>
+      <span class="8">Match Name: <%= match.match %>
+                <input type="hidden" id="<%= 'delete_' + match.match + match.sport %>" name="deleteMatch" value="<%= match.sport +':'+match.match %>">
+                <input type="text" name="reason" >
+                <button type="submit">Delete</button><br>
+              <% } %>
+            <% }); %>
+          </p>
+        <% } %>
+      <% }); %>
+    </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const today = new Date().toISOString().split('T')[0];
+          document.getElementById('date').setAttribute('min', today);
+        });
+        
+        function validateDate() {
+        const selectedDateInput = document.querySelector('input[name^="datee"]:checked');
+        const [, , dateValue] = selectedDate.split(':');
+        console.log("Extracted Date:", dateValue);
+        const currentDate = new Date();
+        const selectedMatchDate = new Date(selectedDate);
+      
+        if (selectedMatchDate < '2023-03-01') {
+          alert('Cannot join past matches. Please select a future match.');
+          return false; 
+        }
+      
+        return true; 
+      }
+      </script>
+</body>
+</html>

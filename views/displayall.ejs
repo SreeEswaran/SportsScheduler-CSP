@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/displayall.css">
+    <style>
+      
+      #displayall {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        .heading {
+            color: #333;
+        }
+
+        .match-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .match-item {
+            margin: 10px 0;
+            padding: 15px;
+            border: 1px solid #4caf50;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f8f8f8;
+        }
+
+        .match-item:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .sub-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        .sub-item {
+            margin: 5px 0;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f0f0f0;
+        }
+
+        .sub-item:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Add animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        #displayall {
+            animation: fadeIn 1s ease;
+        }
+    </style>
+</head>
+<body>   
+    <div id="displayall">
+      <div class="note">
+        Note: This page displays a list of all users and admins who have joined each match
+    </div>  
+      <h1 class="heading">Display all persons</h1>
+      <ul class="match-list">
+          <% matches.forEach(function(match) { %>   
+              <% if(match.reason==null){%>
+                  <li class="match-item">
+                      Sport: <%= match.sport %>,
+                      Match: <%= match.match %>,
+                      Date: <%= match.date %>,
+                      Venue: <%= match.venue %>
+                      <ul class="sub-list">
+                          <% sessionData.forEach(function(session) { %>
+                              <% if (session.sport === match.sport && session.match === match.match) { %>
+                                  <li class="sub-item">
+                                      Admin: <%= session.admin %>
+                                  </li> 
+                              <% } %>
+                          <% }); %>
+                      </ul>
+                  </li>
+              <% }%>
+          <% }); %>
+      </ul>
+  </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "4919",
+    "database": "capstone_dev",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "logging":false
+  },
+  
+  "test": {  
+    "username": "root",
+    "password": "4919",
+    "database": "capstone_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable":"DATABASE_URL",
+    "dialect": "postgres"
+  }
+}

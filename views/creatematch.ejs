@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/creatematch.css">
+    
+</head>
+<body>
+<form action="/creatematch" method="post" onsubmit="return validate()">
+  <div class="label-group">
+    <label for="sport">Sport:</label>
+    <select id="sport" name="sport" required>
+      <% sports.forEach(function(sport) { %>
+        <option value="<%= sport.sport %>"><%= sport.sport %></option>
+      <% }) %>
+    </select>
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" pattern="\d{4}-\d{2}-\d{2}" placeholder="YYYY-MM-DD" required>
+  </div>
+
+  <input type="hidden" id="admin" name="admin" value="<%= adminName%>" required>
+  <div class="label-group">
+    <label for="timein">Start:</label>
+    <input type="time" id="timein" name="timein" required>
+    <label for="timeout">End:</label>
+    <input type="time" id="timeout" name="timeout" required>
+  </div>
+
+  <div class="label-group">
+    <label for="venue">Venue:</label>
+    <input type="text" id="venue" name="venue" required>
+  </div>
+
+  <div class="label-group">
+    <label for="match">Match-Name:</label>
+    <input type="text" id="match" name="match" required>
+  </div>
+
+  <div class="label-group">
+    <label for="teamsize">No of Players Required:</label>
+    <input type="number" id="number" name="teamsize" required>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+ 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('date').setAttribute('min', today);
+  });
+  
+  function validate() {
+  const timein = document.getElementById('timein').value;
+  const timeout = document.getElementById('timeout').value;
+  const timeinDate = new Date(`1970-01-01T${timein}`);
+  const timeoutDate = new Date(`1970-01-01T${timeout}`);
+
+  if (timeinDate >= timeoutDate) {
+    alert('End time must be greater than Start time.');
+    return false;
+  }
+
+  return true;
+}
+</script>
+</body>
+</html>

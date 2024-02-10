@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/createsport.css">
+</head>
+<body>
+    <div id="createsport">
+    <h1>Create Sport Form</h1>
+    <form action="/createsport" method="post" onsubmit="return a()">
+        <label for="sport">Select a Sport:</label>
+        <select id="sport" name="sport" required>
+          <option value="football">Football</option>
+          <option value="basketball">Basketball</option>
+          <option value="tennis">Tennis</option>
+          <option value="soccer">Soccer</option>
+          <option value="baseball">Baseball</option>
+          <option value="volleyball">Volleyball</option>
+          <option value="golf">Golf</option>
+          <option value="cricket">Cricket</option>
+          <option value="swimming">Swimming</option>
+          <option value="rugby">Rugby</option>
+          <option value="hockey">Hockey</option>
+          <option value="table tennis">Table Tennis</option>
+        </select><br>
+        <input type="hidden" id="admin" name="admin" value="<%= adminName %>" required>
+        <br>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <script>
+      function a(){
+let selectedSport = document.getElementById("sport").value;
+<% matches.forEach(function(sport) { %>
+    if ("<%= sport.sport %>" === selectedSport) {
+        alert("Sport is already added in matches");
+        return false;
+    }
+<% }) %>
+  }
+    </script>
+</body>
+</html>

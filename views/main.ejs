@@ -1,0 +1,102 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        /* Additional Internal CSS */
+        body {
+            /* background-image: url('./homepage.png'); */
+            background-size: cover;
+            background-position: top right;
+            background-repeat: no-repeat;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .grid {
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e2e8f0;
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* transition: transform 0.3s ease-in-out; */
+        }
+
+        .link-green:hover {
+            color: #666;
+        }
+    </style>
+    <title>Sports Scheduler Dashboard</title>
+</head>
+<body>
+    <!-- Todo Home Page -->
+    <div class="grid grid-cols-6">
+        <div class="h-1000 col-start-3 col-span-2 card">
+            <h1 class="text-3xl font-semibold text-gray-800 py-2">Sports Scheduler</h1>
+            <p class="text-lg text-gray-600 py-2">New Here? <a class="link-green" href="/signup">Sign-Up now...</a></p>
+            <p class="text-lg text-gray-600 py-2">Already have an Account? <a class="link-green" href="/login">Sign-In</a></p>
+        </div>
+    </div>
+
+    <!-- Footer with sports-text -->
+    <footer class="text-center py-8">
+        <div>
+            <p id="sports-text" class="text-lg text-white" style="color: rgb(233, 233, 239);"></p>
+        </div>
+    </footer>
+
+    <!-- Script for typewriter effect -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Target the element where you want to display the typewriter text
+            const sportsTextElement = document.getElementById('sports-text');
+    
+            // Your sports-related content
+            const sportsContent = ".";
+    
+            // Function to display typewriter effect
+            function typeWriter(text, index) {
+                if (index < text.length) {
+                    sportsTextElement.innerHTML += text.charAt(index);
+                    index++;
+                    setTimeout(function() {
+                        typeWriter(text, index);
+                    }, 50); // Adjust the typing speed (in milliseconds)
+                }
+            }
+    
+            // Call the function to start the typewriter effect
+            typeWriter(sportsContent, 0);
+        });
+    </script>
+</body>
+</html>

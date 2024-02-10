@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Match Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        #joinmatch {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            margin-top: 10px;
+            padding: 8px;
+            width: 70%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+  <div id="joinmatch">
+    <div class="note">
+      Note: Admins can delete any match, while users can only delete matches they created.
+    </div> 
+    <h1>Delete Match Form</h1>
+    <form action="/deletematchforms" method="post">
+      <% const sportsWithMatches = new Map(); %>
+      <!-- Group matches by sport -->
+      <% matches.forEach(function(match) { %>
+        <% if (!sportsWithMatches.has(match.sport)) { %>
+          <% sportsWithMatches.set(match.sport, []); %>
+        <% } %>
+        <% sportsWithMatches.get(match.sport).push(match); %>
+      <% }); %>
+    
+      <!-- Iterate over sports and their matches -->
+      <% sportsWithMatches.forEach(function(matchesForSport, sport) { %>
+        <% if (matchesForSport.some(match => match.reason === null)) { %>
+          <p>
+            <label><strong><%= sport %></strong></label><br>
+            <% matchesForSport.forEach(function(match) { %>
+              <% if (match.reason === null) { %>
+                Date <%= match.date %> 
+                Start <%= match.timein %> 
+                End <%= match.timeout %>  
+                Venue <%= match.venue %> 
+                Player Required <%= match.teamsize %>
+                Match Name: <%= match.match %>
+                <input type="hidden" id="<%= 'delete_' + match.match + match.sport %>" name="deleteMatch" value="<%= match.sport +':'+match.match %>">
+                <input type="text" name="reason" placeholder="Enter reason for deletion">
+                <button type="submit">Delete</button><br>
+              <% } %>
+            <% }); %>
+          </p>
+        <% } %>
+      <% }); %>
+    </form>
+  </div>
+</body>
+</html>
